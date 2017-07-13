@@ -19,6 +19,7 @@ application.use(express.static(path.join(__dirname, 'public')));
 application.use('/', index);
 
 // misc middleware
+application.use(body_parser.json());
 application.use(body_parser.urlencoded({ extended: false }));
 
 // error handling middleware
