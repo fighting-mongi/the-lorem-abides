@@ -68,4 +68,6 @@ application.get('/word/:amount', function(request, response){
     response.render("index", {model: model});
 });
 
-application.listen(3000);
+application.listen(3000, () => {
+    console.log('Listening on 3000')
+});
