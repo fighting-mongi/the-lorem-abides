@@ -7,7 +7,7 @@
 }
 
 h1 {
-	color: white;
+	color: #D2D7D3;
 	text-align: center;
 	font-size: 60px;
     position: relative;
@@ -15,7 +15,7 @@ h1 {
 }
 
 h3 {
-	color: white;
+	color: #D2D7D3;
 	text-align: center;
 	font-family: 'Pacifico', cursive;
 	font-size: 40px;
@@ -36,13 +36,43 @@ h3 {
 	align-items: center;
 }
 
+form {
+	position: relative;
+	bottom: 240px;
+}
+
 label {
-	color: white;
+	color: #D2D7D3;
+	font-size: 24px;
+	padding-right: 5px;
+	padding-left: 20px;
+}
+
+select {
+	height: 35px;
+    width: 50px
+}
+
+.options {
+	justify-content: space-between;
+}
+
+.submit {
+	display: flex;
+	align-content: center;
+	padding-top: 40px;
 }
 
 .button{
 	flex-basis: 100%;
 	align-items: center;
-	height: 20px;
-	width: 50px;
+	height: 50px;
+	width: 320px;
+	font-size: 43px;
+	border-radius: 20px;
+	padding-bottom: 55px;
+}
+
+.content {
+	color: white;
 }
