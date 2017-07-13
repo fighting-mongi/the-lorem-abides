@@ -1,25 +1,28 @@
-var express = require('express');
+const express = require('express');
 const mustache = require('mustache-express');
-var application = express();
+const body_parser = require('body-parser');
+const index = require('./routes/index');
+const lebowski_data = require('./lib/data');
+
+const application = express();
 
 application.engine('mustache', mustache());
 
 application.set('views', './views');
 application.set('view engine', 'mustache');
 
-//string of lebowski quotes aka data
-
-let lebowski = "Hey nice marmot. Mind if I do a J? I'm the Dude, so that's what you call me. That or, uh is Dudeness, or uh the Duder, or El duderino, if you're into the whole bevity thing. Phone's ringing Dude. I'm throwing rocks tonight. Mark it, Dude. Walter, he peed on my rug. He peed on the Dude's rug. Is this your homwork Larry? Take it easy Dude. Nihilists! Do you have to use so many cuss words? Brandt can't watch, though, or he has to pay a hundred dollars. I'm sorry Smokey. You were over the line, that's a foul. Mark it 8, Dude. Oh come on Donny, they were threatening castration! Are we gonna split hairs here? Am I wrong? Dude, let's go bolwling. You're like a child who wanders into the middle of a movie and wants to know. Also, Dude Chinaman is not the preferred nomenclature. Asian-american please. So what are you saying? When you get divorced you turn in your library card? You get a new license? You stop being Jewish?"
-
+// quote arrays
+let lebowski = lebowski_data.lebowski;
+let the_dude = lebowski_data.r_rated;
 
 //general functions
-function add_period(string) { return string+'. '; };
-
-function populate_ipsum(amount, lebowski_array) {
-    if(!amount){return add_period(lebowski_array[0]);}
+function populate_ipsum(amount, lebowski) {
+    if(!amount){return lebowski[0];}
     console.log('times to populate');
-    return populate_ipsum(amount-1, lebowski_array) + add_period(lebowski_array[amount]);
+    return populate_ipsum(amount-1, lebowski) + ' ' + lebowski[amount];
 };
+
+console.log(populate_ipsum(2, lebowski));
 
 function shuffle_array(lebowski_array){
     let lebowski_string = '';
@@ -37,28 +40,24 @@ function shuffle_array(lebowski_array){
 //every n(user input variable) letter in the ipsum
 //
 
-application.get('/', function(request, response){
-    response.render("index");
+// route middleware
+application.use('/', index);
+
+// error handling middleware
+application.use(function(req, res, next) {
+    let err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
+application.use(function(err, req, res, next) {
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-application.get('/paragraph/:amount', function(request, response){
-    let lebowski_array = shuffle_array(lebowski.split('. '));
-    let model = populate_ipsum((request.params.amount*5)-1, lebowski_array);
-    response.render("index", {model: model});
+    res.status(err.status || 500);
+    res.render('error');
 });
 
-
-application.get('/sentence/:amount', function(request, response){
-    let lebowski_array = shuffle_array(lebowski.split('. '));
-    let model = populate_ipsum(request.params.amount-1, lebowski_array);
-    response.render("index", {model: model});
+application.listen(3000, () => {
+    console.log('Listening on 3000')
 });
-
-application.get('/word/:amount', function(request, response){
-    let lebowski_array = shuffle_array(lebowski.split(' '));
-    let model = lebowski_array.splice(0, request.params.amount).join(' ');
-    response.render("index", {model: model});
-});
-
-application.listen(3000);
