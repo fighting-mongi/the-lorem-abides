@@ -1,6 +1,7 @@
 const express = require('express');
-const mustache = require('mustache-express');
+const path = require('path');
 const body_parser = require('body-parser');
+const mustache = require('mustache-express');
 const index = require('./routes/index');
 const lebowski_data = require('./lib/data');
 
@@ -8,8 +9,36 @@ const application = express();
 
 application.engine('mustache', mustache());
 
-application.set('views', './views');
+application.set('views', path.join(__dirname, 'views'));
 application.set('view engine', 'mustache');
+
+// public path
+application.use(express.static(path.join(__dirname, 'public')));
+
+// route middleware
+application.use('/', index);
+
+// error handling middleware
+application.use((request, response, next) => {
+    let error = new Error('Not Found');
+    error.status = 404;
+    next(error);
+});
+
+application.use((error, request, response, next) => {
+    response.locals.message = error.message;
+    response.locals.error = request.app.get('env') === 'development' ? error : {};
+
+    response.status(error.status || 500);
+    response.render('error');
+});
+
+application.listen(3000, () => {
+    console.log('Listening on 3000')
+});
+
+
+/******DATA******/
 
 // quote arrays
 let lebowski = lebowski_data.lebowski;
@@ -21,8 +50,6 @@ function populate_ipsum(amount, lebowski) {
     console.log('times to populate');
     return populate_ipsum(amount-1, lebowski) + ' ' + lebowski[amount];
 };
-
-console.log(populate_ipsum(2, lebowski));
 
 function shuffle_array(lebowski_array){
     let lebowski_string = '';
@@ -39,25 +66,3 @@ function shuffle_array(lebowski_array){
 //R rated version
 //every n(user input variable) letter in the ipsum
 //
-
-// route middleware
-application.use('/', index);
-
-// error handling middleware
-application.use(function(req, res, next) {
-    let err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-application.use(function(err, req, res, next) {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    res.status(err.status || 500);
-    res.render('error');
-});
-
-application.listen(3000, () => {
-    console.log('Listening on 3000')
-});
