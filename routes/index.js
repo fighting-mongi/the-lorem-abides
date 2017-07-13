@@ -24,4 +24,6 @@ router.get('/word/:amount', function(request, response){
     response.render("index", {model: model});
 });
 
+// router.get('/:type/:count')
+
 module.exports = router;

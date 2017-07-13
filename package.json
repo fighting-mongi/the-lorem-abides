@@ -15,5 +15,10 @@
     "express": "^4.15.3",
     "lorem-ipsum": "^1.0.4",
     "mustache-express": "^1.2.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2",
+    "supertest": "^3.0.0"
   }
 }
