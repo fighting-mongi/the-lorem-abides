@@ -24,19 +24,19 @@ application.use(body_parser.json());
 application.use(body_parser.urlencoded({ extended: false }));
 
 // error handling middleware
-application.use((request, response, next) => {
-    let error = new Error('Not Found');
-    error.status = 404;
-    next(error);
-});
+// application.use((request, response, next) => {
+//     let error = new Error('Not Found');
+//     error.status = 404;
+//     next(error);
+// });
 
-application.use((error, request, response, next) => {
-    response.locals.message = error.message;
-    response.locals.error = request.app.get('env') === 'development' ? error : {};
+// application.use((error, request, response, next) => {
+//     response.locals.message = error.message;
+//     response.locals.error = request.app.get('env') === 'development' ? error : {};
 
-    response.status(error.status || 500);
-    response.render('error');
-});
+//     response.status(error.status || 500);
+//     response.render('error');
+// });
 
 application.listen(3000, () => {
     console.log('Listening on 3000')
