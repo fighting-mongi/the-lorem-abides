@@ -15,15 +15,13 @@
     </header>
     <div class="bowling">
     <form action="/" method="get">
-      <label for="words">Words</label>
+    <div class="options">
+      <label class="ratings" for="ratings">Ratings</label>
       <select name="words">
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-        <option value="25">25</option>
-        <option value="30">30</option>
+        <option value="g">G</option>
+        <option value="r">R</option>
       </select>
-      <label for="sentences">Sentences</label>
+      <label class="sentences" for="sentences">Sentences</label>
       <select name="sentences">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -31,7 +29,7 @@
         <option value="4">4</option>
         <option value="5">5</option>
       </select>
-      <label for="paragraphs">Paragraphs</label>
+      <label class="paragraphs" for="paragraphs">Paragraphs</label>
       <select name="paragraphs">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -39,10 +37,16 @@
         <option value="4">4</option>
         <option value="5">5</option>
       </select>
+      </div>
       <div class="submit">
-      <input class="button" type="submit" value="Let's Bowl!">
+      <button class="button" type="submit">Let's Bowl</button>
       </div>
     </form>
+    {{#model}}
+    <div class="content">
+      {{model}}
+    </div>
+    {{/model}}
     </div>
   </body>
 </html>
