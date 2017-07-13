@@ -18,6 +18,9 @@ application.use(express.static(path.join(__dirname, 'public')));
 // route middleware
 application.use('/', index);
 
+// misc middleware
+application.use(body_parser.urlencoded({ extended: false }));
+
 // error handling middleware
 application.use((request, response, next) => {
     let error = new Error('Not Found');
