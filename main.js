@@ -24,6 +24,7 @@ application.use(body_parser.urlencoded({
   extended: false
 }));
 
+/*
 // error handling middleware
 application.use((request, response, next) => {
   let error = new Error('Not Found');
@@ -38,7 +39,7 @@ application.use((error, request, response, next) => {
   response.status(error.status || 500);
   response.render('error');
 });
-
+*/
 application.listen(3000, () => {
   console.log('Listening on 3000')
 });
