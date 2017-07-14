@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Lebowski Lorem Ipsum</title>
-    <link rel="stylesheet" type= "text/css" href="./stylesheets/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-  </head>
-  <body>
-   <header class = "header">
-      <div class="stars-container">
-      <h1 class ="header-text"> The Lorem Abides</h1>
-      <h3 class ="sub-header-text"> The Big Lebowski Lorem Ipsem Generator, Man.</h3>
-      </div>
-    </header>
-    <div class="bowling">
+
+<head>
+  <meta charset="utf-8">
+  <title>Lebowski Lorem Ipsum</title>
+  <link rel="stylesheet" type="text/css" href="./stylesheets/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <div class="stars-container">
+      <h1 class="header-text"> The Lorem Abides</h1>
+      <h3 class="sub-header-text"> The Big Lebowski Lorem Ipsem Generator, Man.</h3>
+    </div>
+  </header>
+  <div class="bowling">
     <form action="/" method="get">
-    <div class="options">
-      <label class="ratings" for="ratings">Ratings</label>
-      <select name="words">
+      <div class="options">
+        <label class="rating" for="rating">Rating</label>
+        <select name="rating">
         <option value="g">G</option>
         <option value="r">R</option>
       </select>
-      <label class="sentences" for="sentences">Sentences</label>
-      <select name="sentences">
+        <label class="sentences" for="sentences">Sentences</label>
+        <select name="sentences">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
       </select>
-      <label class="paragraphs" for="paragraphs">Paragraphs</label>
-      <select name="paragraphs">
+        <label class="paragraphs" for="paragraphs">Paragraphs</label>
+        <select name="paragraphs">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -39,14 +41,15 @@
       </select>
       </div>
       <div class="submit">
-      <button class="button" type="submit">Let's Bowl</button>
+        <button class="button" type="submit">Let's Bowl</button>
       </div>
     </form>
-    {{#model}}
     <div class="content">
-      {{model}}
+      {{#ipsums}}
+        <p>{{.}}</p>
+      {{/ipsums}}
     </div>
-    {{/model}}
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>

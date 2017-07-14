@@ -17,7 +17,7 @@ function populate_ipsum(amount, lebowski) {
 function shuffle_array(lebowski){
     let lebowski_array = [];
     for(var i in lebowski){
-        Math.round(Math.random()) ? 
+        Math.round(Math.random()) ?
             lebowski_array.push(lebowski[i]):
             lebowski_array.unshift(lebowski[i]);
     }
