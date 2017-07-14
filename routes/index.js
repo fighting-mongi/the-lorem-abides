@@ -18,10 +18,6 @@ router.get('/', (request, response) => {
   return response.render('index');
 });
 
-/*********************************************/
-/********** AUSTIN'S DANK FUNCTIONS **********/
-/*********************************************/
-
 // quote arrays
 let lebowski = lebowski_data.lebowski;
 let the_dude = lebowski_data.r_rated;
