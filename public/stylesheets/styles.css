@@ -1,78 +1,81 @@
-.bowling{
-    width: 100%;
-    height: 600px;
-    background-image: url('../images/foto-bowling.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+.bowling {
+  width: 100%;
+  height: 600px;
+  background-image: url('../images/foto-bowling.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1 {
-	color: #D2D7D3;
-	text-align: center;
-	font-size: 60px;
-    position: relative;
-    top: 55px;
+  color: #D2D7D3;
+  text-align: center;
+  font-size: 60px;
+  position: relative;
+  top: 55px;
 }
 
 h3 {
-	color: #D2D7D3;
-	text-align: center;
-	font-family: 'Pacifico', cursive;
-	font-size: 40px;
-    position: relative;
-    top: 72px;
+  color: #D2D7D3;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  position: relative;
+  top: 72px;
 }
 
 .stars-container {
-	background-image: url("../images/anxiety-and-worry.png");
-	background-size: cover;
-	height: 400px;
+  background-image: url("../images/anxiety-and-worry.png");
+  background-size: cover;
+  height: 400px;
 }
 
 .bowling {
-	display: flex;
-	align-content: center;
-	justify-content: space-around;
-	align-items: center;
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 form {
-	position: relative;
-	bottom: 240px;
+  position: relative;
+  bottom: 240px;
 }
 
 label {
-	color: #D2D7D3;
-	font-size: 24px;
-	padding-right: 5px;
-	padding-left: 20px;
+  color: #D2D7D3;
+  font-size: 24px;
+  padding-right: 5px;
+  padding-left: 20px;
 }
 
 select {
-	height: 35px;
-    width: 50px
+  height: 35px;
+  width: 50px
 }
 
 .options {
-	justify-content: space-between;
+  justify-content: space-between;
 }
 
 .submit {
-	display: flex;
-	align-content: center;
-	padding-top: 40px;
+  display: flex;
+  align-content: center;
+  padding-top: 40px;
 }
 
-.button{
-	flex-basis: 100%;
-	align-items: center;
-	height: 50px;
-	width: 320px;
-	font-size: 43px;
-	border-radius: 20px;
-	padding-bottom: 55px;
+.button {
+  flex-basis: 100%;
+  align-items: center;
+  height: 50px;
+  width: 320px;
+  font-size: 43px;
+  border-radius: 20px;
+  padding-bottom: 55px;
 }
 
 .content {
-	color: white;
+  color: black;
+  background-color: white;
+  width: 80%;
 }

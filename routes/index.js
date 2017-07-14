@@ -1,47 +1,66 @@
 const express = require('express');
 const router = express.Router();
 
+const lebowski_data = require('../lib/data');
+
 // TODO update routes
-router.get('/', function(request, response){
-    response.render("index");
-});
+router.get('/', (request, response) => {
 
-router.post('/', function(request, response){
-
-    console.log(request.query);
-
-    let words = request.query.words;
+  if (request.query) {
+    let rating = request.query.rating;
     let sentences = request.query.sentences;
     let paragraphs = request.query.paragraphs;
 
-    let tempResponse = {
-        words: words,
-        sentences: sentences,
-        paragraphs: paragraphs
-    }
+    let model = lebowski_ipsum(rating, sentences, paragraphs);
 
-    response.json(tempResponse);
-    response.end();
+    return response.render('index', model);
+  }
+  return response.render('index');
 });
 
-// router.get('/paragraph/:amount', function(request, response){
-//     let lebowski_array = shuffle_array(lebowski);
-//     let model = populate_ipsum((request.params.amount*5)-1, lebowski_array);
-//     response.render("index", {model: model});
-// });
+/*********************************************/
+/********** AUSTIN'S DANK FUNCTIONS **********/
+/*********************************************/
 
-// router.get('/sentence/:amount', function(request, response){
-//     let lebowski_array = shuffle_array(lebowski);
-//     let model = populate_ipsum(request.params.amount-1, lebowski_array);
-//     response.render("index", {model: model});
-// });
+// quote arrays
+let lebowski = lebowski_data.lebowski;
+let the_dude = lebowski_data.r_rated;
 
-// router.get('/word/:amount', function(request, response){
-//     let lebowski_array = shuffle_array(lebowski.split(' '));
-//     let model = lebowski_array.splice(0, request.params.amount).join(' ');
-//     response.render("index", {model: model});
-// });
+function populate_ipsum(sentences, lebowski) {
+  if (!sentences) {
+    return lebowski[0];
+  }
+  return populate_ipsum(sentences - 1, lebowski) + ' ' + lebowski[sentences];
+};
 
-// router.get('/:type/:count')
+function shuffle_array(lebowski) {
+  let lebowski_array = [];
+
+  for (var i in lebowski) {
+    Math.round(Math.random()) ?
+      lebowski_array.push(lebowski[i]) :
+      lebowski_array.unshift(lebowski[i]);
+  }
+
+  return lebowski_array;
+}
+
+function lebowski_ipsum(rating, sentences, paragraphs) {
+  let tmp_lebowski = lebowski;
+  let model = {};
+  model.ipsums = [];
+
+  // array creation/randomization
+  if (rating == 'r') {
+    tmp_lebowski = tmp_lebowski.concat(the_dude);
+  }
+  let lebowski_array = shuffle_array(tmp_lebowski);
+
+  for (let i = 0; i < paragraphs; i++) {
+    lebowski_array = shuffle_array(tmp_lebowski);
+    model.ipsums.push(populate_ipsum((sentences - 1), lebowski_array));
+  }
+  return model;
+}
 
 module.exports = router;
